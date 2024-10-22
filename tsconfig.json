@@ -1,0 +1,11 @@
+{
+  "compilerOptions": {
+    "module": "Preserve",
+    "target": "ESNext",
+    "outDir": "dist",
+    "rootDir": "src",
+    "strict": true,
+    "esModuleInterop": true
+  },
+  "include": ["src/**/*"]
+}
