@@ -1,15 +1,27 @@
 // Experiment with generating a key pair, uploading the public key to the server,
 // and authenticating with the private key.
 
-const { authWithPrivateKey, generateBase64KeyPair, uploadPublicKey } =
-  await import('./utils/authUtils.mjs')
+import {
+  authWithPrivateKey,
+  generateBase64KeyPair,
+  uploadPublicKey,
+} from './utils/authUtils.mjs'
+import { loginPrompt } from './utils/loginPrompt.mjs'
+import { connectToDheServer, dheCredentials } from './utils/dheUtils.mjs'
 
-const { loginPrompt } = await import('./utils/connectionUtils.mjs')
-const { client, credentials } = await loginPrompt()
+const { serverUrl, username, password } = await loginPrompt()
+const credentials = dheCredentials({ username, password })
+
+const { client: dheClient } = await connectToDheServer(serverUrl, credentials)
 
 const [publicKey, privateKey] = generateBase64KeyPair()
 console.log({ publicKey, privateKey })
 
-await uploadPublicKey(client, credentials, publicKey)
+await uploadPublicKey(dheClient, credentials, publicKey)
 
-await authWithPrivateKey(client, publicKey, privateKey, credentials.username)
+await authWithPrivateKey({
+  dheClient,
+  publicKey,
+  privateKey,
+  username: credentials.username,
+})

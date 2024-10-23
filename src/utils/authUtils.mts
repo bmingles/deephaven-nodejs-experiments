@@ -117,16 +117,27 @@ declare module '@deephaven-enterprise/jsapi-types' {
   }
 }
 
-export async function authWithPrivateKey(
-  dheClient: EnterpriseClient,
-  publicKey: Base64PublicKey,
-  privateKey: Base64PrivateKey,
-  username?: string,
-) {
-  if (username == null) {
-    throw new Error('username is required')
-  }
-
+/**
+ * Authenticate using public / private key.
+ * @param dheClient The DHE client to use.
+ * @param publicKey The base64 encoded public key.
+ * @param privateKey The base64 encoded private key.
+ * @param username The username to authenticate as.
+ * @param operateAs The optional username to operate as. Defaults to `username`.
+ */
+export async function authWithPrivateKey({
+  dheClient,
+  publicKey,
+  privateKey,
+  username,
+  operateAs = username,
+}: {
+  dheClient: EnterpriseClient
+  publicKey: Base64PublicKey
+  privateKey: Base64PrivateKey
+  username: string
+  operateAs?: string
+}): Promise<void> {
   try {
     const { nonce }: { nonce: Base64Nonce } =
       await dheClient.getChallengeNonce()
@@ -139,7 +150,7 @@ export async function authWithPrivateKey(
       signedNonce,
       publicKeyWithSentinel,
       username,
-      username,
+      operateAs,
     )
 
     console.log('authResult:', authResult)

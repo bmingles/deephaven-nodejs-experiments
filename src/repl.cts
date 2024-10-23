@@ -3,7 +3,8 @@
  */
 
 import repl from 'node:repl'
-import { loginPrompt } from './utils/connectionUtils.mjs'
+import { loginPrompt } from './utils/loginPrompt.mjs'
+import { connectToDheServer, dheCredentials } from './utils/dheUtils.mjs'
 
 startRepl()
 
@@ -15,7 +16,10 @@ startRepl()
 // }
 
 async function startRepl() {
-  const { dhe, client, credentials } = await loginPrompt()
+  const { serverUrl, username, password } = await loginPrompt()
+
+  const credentials = dheCredentials({ username, password })
+  const { dhe, client } = await connectToDheServer(serverUrl, credentials)
 
   const r = repl.start({
     prompt: 'DH > ',
