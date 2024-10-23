@@ -1,3 +1,7 @@
+/**
+ * REPL with DHE jsapi + client in context.
+ */
+
 import repl from 'node:repl'
 import { loginPrompt } from './utils/connectionUtils.mjs'
 
