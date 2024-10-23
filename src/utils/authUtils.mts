@@ -65,6 +65,12 @@ export function signWithPrivateKey(
   }).toString('base64') as Base64Signature
 }
 
+/**
+ * Upload public key to DHE server.
+ * @param dheClient
+ * @param dheCredentials
+ * @param publicKey
+ */
 export async function uploadPublicKey(
   dheClient: EnterpriseClient,
   dheCredentials: DheLoginCredentials,
