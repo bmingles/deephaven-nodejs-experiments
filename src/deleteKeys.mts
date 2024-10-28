@@ -7,14 +7,14 @@ const credentials = dheCredentials({ username, password })
 
 const { client: dheClient } = await connectToDheServer(serverUrl, credentials)
 
-deletePublicKeys(dheClient, username, [])
+deletePublicKeys(dheClient, username, [''])
 
-function deletePublicKeys(
+async function deletePublicKeys(
   dheClient: EnterpriseClient,
   userName: string,
   publicKeys: string[],
 ) {
-  publicKeys.forEach(async (toDelete: string) => {
+  for (const toDelete of publicKeys) {
     // if (!toDelete.startsWith('RUM6')) {
     //   toDelete = `RUM6${toDelete}`
     // }
@@ -39,7 +39,7 @@ function deletePublicKeys(
     )
 
     console.log(x.status)
-  })
+  }
 
   process.exit(0)
 }
