@@ -6,36 +6,11 @@ import type {
 import { loadModules } from '@deephaven/jsapi-nodejs'
 import path from 'node:path'
 import { polyfill } from './polyfillUtils.mjs'
+import type { UnauthenticatedClient } from '@deephaven-enterprise/auth-nodejs'
 
 declare global {
   // This gets added by the DHE jsapi.
   const iris: DheType
-}
-
-export async function connectToDheServer(
-  serverUrl: URL,
-  credentials: DheLoginCredentials,
-): Promise<{ dhe: DheType; client: EnterpriseClient }> {
-  const dhe = await getDhe(serverUrl)
-  const client = await createDheClient(dhe, serverUrl)
-
-  await client.login(credentials)
-
-  return { dhe, client }
-}
-
-export function dheCredentials({
-  username,
-  password: token,
-}: {
-  username: string
-  password: string
-}): DheLoginCredentials & { username: string } {
-  return {
-    type: 'password',
-    username,
-    token,
-  }
 }
 
 export async function getDhe(serverUrl: URL): Promise<DheType> {
@@ -60,7 +35,7 @@ export async function getDhe(serverUrl: URL): Promise<DheType> {
 export async function createDheClient(
   dhe: DheType,
   serverUrl: URL,
-): Promise<EnterpriseClient> {
+): Promise<UnauthenticatedClient> {
   const dheClient = new dhe.Client(getWsUrl(serverUrl).toString())
 
   return new Promise((resolve) => {
@@ -68,7 +43,7 @@ export async function createDheClient(
       dhe.Client.EVENT_CONNECT,
       () => {
         unsubscribe()
-        resolve(dheClient)
+        resolve(dheClient as UnauthenticatedClient)
       },
     )
   })

@@ -4,7 +4,11 @@
 
 import repl from 'node:repl'
 import { loginPrompt } from './utils/loginPrompt.mjs'
-import { connectToDheServer, dheCredentials } from './utils/dheUtils.mjs'
+import {
+  loginClientWithPassword,
+  type PasswordCredentials,
+} from '@deephaven-enterprise/auth-nodejs'
+import { createDheClient, getDhe } from './utils/dheUtils.mjs'
 
 startRepl()
 
@@ -18,8 +22,16 @@ startRepl()
 async function startRepl() {
   const { serverUrl, username, password } = await loginPrompt()
 
-  const credentials = dheCredentials({ username, password })
-  const { dhe, client } = await connectToDheServer(serverUrl, credentials)
+  const credentials: PasswordCredentials = {
+    type: 'password',
+    username,
+    token: password,
+  }
+
+  const dhe = await getDhe(serverUrl)
+  const dheClient = await createDheClient(dhe, serverUrl)
+
+  await loginClientWithPassword(dheClient, credentials)
 
   const r = repl.start({
     prompt: 'DH > ',
@@ -35,7 +47,7 @@ async function startRepl() {
   Object.defineProperty(r.context, 'client', {
     configurable: false,
     enumerable: true,
-    value: client,
+    value: dheClient,
   })
 
   // TODO: This could be easily exposed via intellisense if user isn't careful.

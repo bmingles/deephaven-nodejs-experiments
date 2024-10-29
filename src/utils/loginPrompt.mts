@@ -2,6 +2,7 @@
  * Prompt the user for information to connect to a DH server.
  */
 
+import type { Username } from '@deephaven-enterprise/auth-nodejs'
 import fs from 'node:fs'
 import path from 'node:path'
 import { read } from 'read'
@@ -19,7 +20,7 @@ const AUTO_COMPLETE_PATH = path.join(
 
 export interface ServerCredentials {
   serverUrl: URL
-  username: string
+  username: Username
   password: string
 }
 
@@ -35,7 +36,7 @@ export async function loginPrompt(): Promise<ServerCredentials> {
   })
   const serverUrl = new URL(serverUrlRaw)
 
-  const username = await read({ prompt: 'Enter your username: ' })
+  const username = (await read({ prompt: 'Enter your username: ' })) as Username
   const password = await read({
     prompt: 'Enter your password: ',
     replace: '*',

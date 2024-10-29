@@ -1,11 +1,22 @@
+/**
+ * Experiment with generating keys in browser. Note that this isn't actually
+ * running in a browser, so hard to know for sure if it works in this context.
+ * Also, seems unlikely we want to have to load private keys for signing in the
+ * browser anyway. Leaving for now for reference in case that changes.
+ */
+import type {
+  Base64Nonce,
+  Base64PrivateKey,
+  Base64PublicKey,
+  Base64Signature,
+} from '@deephaven-enterprise/auth-nodejs'
 import type { EnterpriseClient } from '@deephaven-enterprise/jsapi-types'
-import {
-  EC_SENTINEL,
-  type Base64Nonce,
-  type Base64PrivateKey,
-  type Base64PublicKey,
-  type Base64Signature,
-} from './authUtils.mjs'
+
+/*
+ * Base64 encoded value of 'EC:'. Used to identify that a key is an EC key when
+ * passing to DH server.
+ */
+const EC_SENTINEL = 'RUM6' as const
 
 export async function generateBase64KeyPair(): Promise<
   [Base64PublicKey, Base64PrivateKey]
