@@ -10,10 +10,10 @@ export type Brand<T extends string, TBase = string> = TBase & {
   readonly [__brand]: T
 }
 
-type Base64PrivateKey = Brand<'Base64PrivateKey', string>
-type Base64PublicKey = Brand<'Base64PublicKey', string>
-type Base64Nonce = Brand<'Base64Nonce', string>
-type Base64Signature = Brand<'Base64Signature', string>
+export type Base64PrivateKey = Brand<'Base64PrivateKey', string>
+export type Base64PublicKey = Brand<'Base64PublicKey', string>
+export type Base64Nonce = Brand<'Base64Nonce', string>
+export type Base64Signature = Brand<'Base64Signature', string>
 
 /*
  * Base64 encoded value of 'EC:'. Used to identify that a key is an EC key when

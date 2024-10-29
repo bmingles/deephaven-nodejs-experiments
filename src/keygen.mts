@@ -6,6 +6,10 @@ import {
   generateBase64KeyPair,
   uploadPublicKey,
 } from './utils/authUtils.mjs'
+// import {
+//   authWithPrivateKey,
+//   generateBase64KeyPair,
+// } from './utils/authUtilsBrowser.mjs'
 import { loginPrompt } from './utils/loginPrompt.mjs'
 import {
   connectToDheServer,
@@ -21,7 +25,7 @@ const { dhe, client: dheClient } = await connectToDheServer(
   credentials,
 )
 
-const [publicKey, privateKey] = generateBase64KeyPair()
+const [publicKey, privateKey] = await generateBase64KeyPair()
 console.log({ publicKey, privateKey })
 
 await uploadPublicKey(dheClient, credentials, publicKey)
