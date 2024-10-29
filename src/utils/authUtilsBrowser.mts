@@ -184,7 +184,7 @@ export async function authWithPrivateKey({
       operateAs,
     )
 
-    console.log('authResult:', authResult)
+    console.log('authResult:', authResult ?? 'ok')
   } catch (e) {
     console.error(e)
   }
