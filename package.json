@@ -8,9 +8,7 @@
   "author": "Brian Ingles <brianingles@illumon.com>",
   "license": "MIT",
   "type": "module",
-  "bin": {
-    "deephaven-repl": "dist/bin.mjs"
-  },
+  "bin": "dist/bin.mjs",
   "scripts": {
     "preinstall": "tsc"
   },
