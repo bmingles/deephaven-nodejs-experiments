@@ -1,11 +1,21 @@
+import {
+  loginClientWithPassword,
+  type PasswordCredentials,
+} from '@deephaven-enterprise/auth-nodejs'
 import type { EnterpriseClient } from '@deephaven-enterprise/jsapi-types'
-import { connectToDheServer, dheCredentials } from './utils/dheUtils.mjs'
 import { loginPrompt } from './utils/loginPrompt.mjs'
+import { createDheClient, getDhe } from './utils/dheUtils.mjs'
 
 const { serverUrl, username, password } = await loginPrompt()
-const credentials = dheCredentials({ username, password })
+const credentials: PasswordCredentials = {
+  type: 'password',
+  username,
+  token: password,
+}
 
-const { client: dheClient } = await connectToDheServer(serverUrl, credentials)
+const dhe = await getDhe(serverUrl)
+const dheClient = await createDheClient(dhe, serverUrl)
+await loginClientWithPassword(dheClient, credentials)
 
 deletePublicKeys(dheClient, username, [''])
 
