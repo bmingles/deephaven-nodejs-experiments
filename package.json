@@ -1,5 +1,5 @@
 {
-  "name": "deephaven-node-repl",
+  "name": "deephaven-repl",
   "version": "1.0.0",
   "private": true,
   "decription": "",
@@ -8,7 +8,9 @@
   "author": "Brian Ingles <brianingles@illumon.com>",
   "license": "MIT",
   "type": "module",
-  "bin": "dist/bin.mjs",
+  "bin": {
+    "deephaven-repl": "dist/bin.mjs"
+  },
   "scripts": {
     "preinstall": "tsc"
   },
