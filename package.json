@@ -14,15 +14,14 @@
   },
   "dependencies": {
     "@deephaven-enterprise/auth-nodejs": "1.20240723.107-alpha-auth-nodejs.23556",
-    "@deephaven/jsapi-nodejs": "^0.97.0",
-    "read": "^4.0.0"
-  },
-  "devDependencies": {
     "@deephaven-enterprise/jsapi-types": "^1.20240723.107-alpha-auth-nodejs.23556",
+    "@deephaven/jsapi-nodejs": "^0.97.0",
     "@types/node": "^22.7.8",
+    "read": "^4.0.0",
     "tsx": "^4.19.1",
     "typescript": "^5.6.3"
   },
+  "devDependencies": {},
   "optionalDependencies": {
     "@esbuild/aix-ppc64": "0.24.0",
     "@esbuild/android-arm": "0.24.0",
