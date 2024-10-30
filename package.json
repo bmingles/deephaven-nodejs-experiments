@@ -8,7 +8,10 @@
   "author": "Brian Ingles <brianingles@illumon.com>",
   "license": "MIT",
   "type": "commonjs",
-  "scripts": {},
+  "bin": "dist/bin.mjs",
+  "scripts": {
+    "preinstall": "tsc"
+  },
   "dependencies": {
     "@deephaven-enterprise/auth-nodejs": "1.20240723.107-alpha-auth-nodejs.23555",
     "@deephaven/jsapi-nodejs": "^0.96.2-alpha-jsapi-nodejs.7",
@@ -17,6 +20,7 @@
   "devDependencies": {
     "@deephaven-enterprise/jsapi-types": "1.20240723.107-alpha-auth-nodejs.23555",
     "@types/node": "^22.7.8",
-    "tsx": "^4.19.1"
+    "tsx": "^4.19.1",
+    "typescript": "^5.6.3"
   }
 }
