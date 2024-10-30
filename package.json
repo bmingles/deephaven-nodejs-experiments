@@ -7,7 +7,7 @@
   "keywords": [],
   "author": "Brian Ingles <brianingles@illumon.com>",
   "license": "MIT",
-  "type": "commonjs",
+  "type": "module",
   "bin": "dist/bin.mjs",
   "scripts": {
     "preinstall": "tsc"
