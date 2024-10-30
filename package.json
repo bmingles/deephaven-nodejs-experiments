@@ -10,7 +10,7 @@
   "type": "module",
   "bin": "dist/bin.mjs",
   "scripts": {
-    "preinstall": "tsc"
+    "preinstall": "./node_modules/.bin/tsc"
   },
   "dependencies": {
     "@deephaven-enterprise/auth-nodejs": "1.20240723.107-alpha-auth-nodejs.23556",
