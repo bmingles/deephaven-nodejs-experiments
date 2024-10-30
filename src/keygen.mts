@@ -3,6 +3,7 @@
 import {
   createClient,
   generateBase64KeyPair,
+  keyWithSentinel,
   loginClientWithKeyPair,
   uploadPublicKey,
   type KeyPairCredentials,
@@ -22,7 +23,17 @@ const dhe = await getDhe(serverUrl)
 const dheClient = await createClient(dhe, serverUrl)
 
 const { publicKey, privateKey } = await generateBase64KeyPair()
-console.log({ publicKey, privateKey })
+
+console.log()
+console.log(
+  [
+    `user ${username}`,
+    `operateas ${username}`,
+    `public ${keyWithSentinel('ec', publicKey)}`,
+    `private ${keyWithSentinel('ec', privateKey as any)}`,
+  ].join('\n'),
+)
+console.log()
 
 await uploadPublicKey(dheClient, credentials, publicKey, 'ec')
 
