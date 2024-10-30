@@ -20,7 +20,6 @@ const credentials: PasswordCredentials = {
 }
 
 const dhe = await getDhe(serverUrl)
-const dheClient = await createClient(dhe, serverUrl)
 
 const { publicKey, privateKey } = await generateBase64KeyPair()
 
@@ -30,12 +29,19 @@ console.log(
     `user ${username}`,
     `operateas ${username}`,
     `public ${keyWithSentinel('ec', publicKey)}`,
-    `private ${keyWithSentinel('ec', privateKey as any)}`,
+    `private ${keyWithSentinel('ec', privateKey)}`,
   ].join('\n'),
 )
 console.log()
 
-await uploadPublicKey(dheClient, credentials, publicKey, 'ec')
+await uploadPublicKey({
+  dhe,
+  serverUrl,
+  comment: '',
+  credentials,
+  publicKey,
+  type: 'ec',
+})
 
 const keyPairCredentials: KeyPairCredentials = {
   type: 'keyPair',

@@ -10,12 +10,12 @@
   "type": "module",
   "bin": "dist/bin.mjs",
   "dependencies": {
-    "@deephaven-enterprise/auth-nodejs": "1.20240723.107-alpha-auth-nodejs.23556",
+    "@deephaven-enterprise/auth-nodejs": "1.20240723.107-alpha-auth-nodejs.23563",
     "@deephaven/jsapi-nodejs": "^0.97.0",
     "read": "^4.0.0"
   },
   "devDependencies": {
-    "@deephaven-enterprise/jsapi-types": "^1.20240723.107-alpha-auth-nodejs.23556",
+    "@deephaven-enterprise/jsapi-types": "^1.20240723.107-alpha-auth-nodejs.23563",
     "@types/node": "^22.7.8",
     "tsx": "^4.19.1",
     "typescript": "^5.6.3"
