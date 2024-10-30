@@ -5,10 +5,11 @@
 import repl from 'node:repl'
 import { loginPrompt } from './utils/loginPrompt.mjs'
 import {
+  createClient,
   loginClientWithPassword,
   type PasswordCredentials,
 } from '@deephaven-enterprise/auth-nodejs'
-import { createDheClient, getDhe } from './utils/dheUtils.mjs'
+import { getDhe } from './utils/dheUtils.mjs'
 
 startRepl()
 
@@ -29,7 +30,7 @@ async function startRepl() {
   }
 
   const dhe = await getDhe(serverUrl)
-  const dheClient = await createDheClient(dhe, serverUrl)
+  const dheClient = await createClient(dhe, serverUrl)
 
   await loginClientWithPassword(dheClient, credentials)
 

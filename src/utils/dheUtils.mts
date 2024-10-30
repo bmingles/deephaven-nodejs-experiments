@@ -31,35 +31,3 @@ export async function getDhe(serverUrl: URL): Promise<DheType> {
   // DHE currently exposes the jsapi via the global `iris` object.
   return iris
 }
-
-export async function createDheClient(
-  dhe: DheType,
-  serverUrl: URL,
-): Promise<UnauthenticatedClient> {
-  const dheClient = new dhe.Client(getWsUrl(serverUrl).toString())
-
-  return new Promise((resolve) => {
-    const unsubscribe = dheClient.addEventListener(
-      dhe.Client.EVENT_CONNECT,
-      () => {
-        unsubscribe()
-        resolve(dheClient as UnauthenticatedClient)
-      },
-    )
-  })
-}
-
-/**
- * Get the WebSocket URL for a DHE server URL.
- * @param serverUrl The DHE server URL.
- * @returns The WebSocket URL.
- */
-export function getWsUrl(serverUrl: URL): URL {
-  const url = new URL('/socket', serverUrl)
-  if (url.protocol === 'http:') {
-    url.protocol = 'ws:'
-  } else {
-    url.protocol = 'wss:'
-  }
-  return url
-}

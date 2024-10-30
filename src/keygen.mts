@@ -1,6 +1,7 @@
 // Experiment with generating a key pair, uploading the public key to the server,
 // and authenticating with the private key.
 import {
+  createClient,
   generateBase64KeyPair,
   loginClientWithKeyPair,
   uploadPublicKey,
@@ -8,7 +9,7 @@ import {
   type PasswordCredentials,
 } from '@deephaven-enterprise/auth-nodejs'
 import { loginPrompt } from './utils/loginPrompt.mjs'
-import { createDheClient, getDhe } from './utils/dheUtils.mjs'
+import { getDhe } from './utils/dheUtils.mjs'
 
 const { serverUrl, username, password } = await loginPrompt()
 const credentials: PasswordCredentials = {
@@ -18,7 +19,7 @@ const credentials: PasswordCredentials = {
 }
 
 const dhe = await getDhe(serverUrl)
-const dheClient = await createDheClient(dhe, serverUrl)
+const dheClient = await createClient(dhe, serverUrl)
 
 const { publicKey, privateKey } = await generateBase64KeyPair()
 console.log({ publicKey, privateKey })
@@ -36,7 +37,7 @@ const keyPairCredentials: KeyPairCredentials = {
 }
 
 await loginClientWithKeyPair(
-  await createDheClient(dhe, serverUrl),
+  await createClient(dhe, serverUrl),
   keyPairCredentials,
 )
 
