@@ -9,6 +9,9 @@
   "license": "MIT",
   "type": "module",
   "bin": "dist/bin.mjs",
+  "scripts": {
+    "build": "tsc"
+  },
   "dependencies": {
     "@deephaven-enterprise/auth-nodejs": "1.20240723.107-alpha-auth-nodejs.23563",
     "@deephaven/jsapi-nodejs": "^0.97.0",
