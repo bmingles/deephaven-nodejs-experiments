@@ -18,7 +18,7 @@ const dhe = await getDhe(serverUrl)
 const dheClient = await createClient(dhe, serverUrl)
 await loginClientWithPassword(dheClient, credentials)
 
-deletePublicKeys(dheClient, username, [''])
+deletePublicKeys(dheClient, username, [])
 
 async function deletePublicKeys(
   dheClient: EnterpriseClient,
