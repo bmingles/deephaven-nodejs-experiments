@@ -1,4 +1,4 @@
-export function polyfill() {
+export function polyfill(https: boolean = false) {
   // These will eventually not be needed once JSAPI is updated to not rely on `window` and `self`.
   // @ts-ignore
   globalThis.self = globalThis
@@ -10,5 +10,7 @@ export function polyfill() {
   // Not sure if it is needed for other requests. The url is an arbitrary
   // non-https url just to make it stand out in logs.
   // @ts-ignore
-  global.window.location = new URL('http://deephaven-repl.localhost/')
+  global.window.location = new URL(
+    `http${https ? 's' : ''}://deephaven-repl.localhost/`,
+  )
 }
