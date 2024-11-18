@@ -13,14 +13,14 @@
     "build": "tsc"
   },
   "dependencies": {
-    "@deephaven-enterprise/auth-nodejs": "1.20240723.107-alpha-auth-nodejs.23563",
-    "@deephaven/jsapi-nodejs": "^0.97.0",
+    "@deephaven-enterprise/auth-nodejs": "1.20240723.124-beta",
+    "@deephaven/jsapi-nodejs": "^0.99.0",
     "read": "^4.0.0"
   },
   "devDependencies": {
-    "@deephaven-enterprise/jsapi-types": "^1.20240723.107-alpha-auth-nodejs.23563",
-    "@types/node": "^22.7.8",
-    "tsx": "^4.19.1",
+    "@deephaven-enterprise/jsapi-types": "1.20240723.124-beta",
+    "@types/node": "^22.9.0",
+    "tsx": "^4.19.2",
     "typescript": "^5.6.3"
   },
   "optionalDependencies": {
