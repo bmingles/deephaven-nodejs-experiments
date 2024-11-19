@@ -15,7 +15,7 @@ export async function getDhc(serverUrl: URL): Promise<typeof DhType> {
     download: true,
     storageDir,
     sourceModuleType: 'esm',
-    // targetModuleType: 'cjs',
+    targetModuleType: 'cjs',
     esbuildOptions: {
       tsconfigRaw: {
         compilerOptions: {
