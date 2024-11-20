@@ -38,9 +38,8 @@ export function enableUndiciDiagnostics(): void {
     'undici:request:headers',
     ({ request, response }: { request: Request; response: Response }) => [
       request,
-      // response.headers are buffers
       response.statusText,
-      response.headers.map(String),
+      (response.headers as unknown as Buffer[]).map(String),
     ],
   )
 

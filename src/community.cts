@@ -14,7 +14,7 @@ if (typeof globalThis.__dirname === 'undefined') {
 async function main() {
   const serverUrl = new URL('https://localhost:8443/')
 
-  const dhc = await getDhc(serverUrl)
+  const dhc = await getDhc(serverUrl, 'cjs')
 
   const client = new dhc.CoreClient(serverUrl.href)
 

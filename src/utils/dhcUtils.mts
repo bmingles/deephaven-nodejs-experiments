@@ -3,7 +3,10 @@ import { loadModules } from '@deephaven/jsapi-nodejs'
 import type { dh as DhType } from '@deephaven/jsapi-types'
 import { polyfill } from './polyfillUtils.mjs'
 
-export async function getDhc(serverUrl: URL): Promise<typeof DhType> {
+export async function getDhc(
+  serverUrl: URL,
+  targetModuleType: 'cjs' | 'esm',
+): Promise<typeof DhType> {
   polyfill(true)
 
   const storageDir = path.join(__dirname, '..', 'tmp')
@@ -15,7 +18,7 @@ export async function getDhc(serverUrl: URL): Promise<typeof DhType> {
     download: true,
     storageDir,
     sourceModuleType: 'esm',
-    targetModuleType: 'cjs',
+    targetModuleType,
     esbuildOptions: {
       tsconfigRaw: {
         compilerOptions: {

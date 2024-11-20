@@ -1,15 +1,15 @@
-import { setGlobalDispatcher, Agent } from 'undici'
 import { getDhc } from './utils/dhcUtils.mjs'
+import {
+  enableUndiciDiagnostics,
+  enableUndiciHttp2,
+} from './utils/http2Utils.mjs'
 
 process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0'
 console.log('Node.js version:', process.version)
 console.log('undici version:', process.versions.undici)
 
-setGlobalDispatcher(
-  new Agent({
-    allowH2: true,
-  }),
-)
+enableUndiciHttp2()
+enableUndiciDiagnostics()
 
 if (typeof globalThis.__dirname === 'undefined') {
   globalThis.__dirname = import.meta.dirname
@@ -17,7 +17,7 @@ if (typeof globalThis.__dirname === 'undefined') {
 
 const serverUrl = new URL('https://localhost:8443/')
 
-const dhc = await getDhc(serverUrl)
+const dhc = await getDhc(serverUrl, 'esm')
 
 const client = new dhc.CoreClient(serverUrl.href)
 
@@ -26,6 +26,8 @@ await client.login({
 })
 
 const cn = await client.getAsIdeConnection()
+
+await cn.getConsoleTypes()
 
 const session = await cn.startSession('python')
 
