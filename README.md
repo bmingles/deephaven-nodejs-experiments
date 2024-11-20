@@ -17,3 +17,5 @@ npx tsx src/repl.cts
 ```sh
 npx tsx src/keygen.mts
 ```
+
+Examples can also be run by opening the file and `f5` to run `tsx` launch config.
