@@ -4,9 +4,7 @@ import {
   enableUndiciHttp2,
 } from './utils/http2Utils.mjs'
 
-process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0'
 console.log('Node.js version:', process.version)
-console.log('undici version:', process.versions.undici)
 
 enableUndiciHttp2()
 enableUndiciDiagnostics()
@@ -31,7 +29,6 @@ await cn.getConsoleTypes()
 
 const session = await cn.startSession('python')
 
-// await session.runCode('print("Hello, World!")')
 try {
   await session.runCode(
     'from deephaven import time_table\n\nsimple_ticking = time_table("PT2S")\n\nsimple_ticking2 = time_table("PT2S")\n\nsimple_ticking3 = time_table("PT2S")',

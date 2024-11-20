@@ -1,5 +1,11 @@
 import diagnosticsChannel from 'diagnostics_channel'
-import { setGlobalDispatcher, Agent, Request, Response } from 'undici'
+import {
+  setGlobalDispatcher,
+  Agent,
+  Request,
+  Response,
+  type WebSocket,
+} from 'undici'
 
 export function enableUndiciHttp2(): void {
   process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0'
@@ -9,6 +15,14 @@ export function enableUndiciHttp2(): void {
       allowH2: true,
     }),
   )
+}
+
+type ConnectParams = Record<string, unknown>
+type ConnectionEvent = {
+  error?: Error
+  socket: WebSocket
+  connectParams: ConnectParams
+  connector: Function
 }
 
 // https://github.com/nodejs/undici/blob/main/docs/docs/api/DiagnosticsChannel.md
@@ -62,25 +76,31 @@ export function enableUndiciDiagnostics(): void {
 
   logDiagnostics(
     'undici:client:beforeConnect',
-    ({ connectParams, connector }) => [connectParams, connector],
+    ({
+      connectParams,
+      connector,
+    }: {
+      connectParams: ConnectParams
+      connector: Function
+    }) => [connectParams, connector.name],
   )
 
   logDiagnostics(
     'undici:client:connected',
-    ({ socket, connectParams, connector }) => [
+    ({ socket, connectParams, connector }: ConnectionEvent) => [
       socket,
       connectParams,
-      connector,
+      connector.name,
     ],
   )
 
   logDiagnostics(
     'undici:client:connectError',
-    ({ error, socket, connectParams, connector }) => [
+    ({ error, socket, connectParams, connector }: ConnectionEvent) => [
       error,
       socket,
       connectParams,
-      connector,
+      connector.name,
     ],
     { isError: true },
   )
