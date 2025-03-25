@@ -1,3 +1,4 @@
+import { NodeHttp2gRPCTransport } from '@deephaven/jsapi-nodejs'
 import { getDhc } from './utils/dhcUtils.mjs'
 
 console.log('Node.js version:', process.version)
@@ -10,7 +11,12 @@ const serverUrl = new URL('http://localhost:10000/')
 
 const dhc = await getDhc(serverUrl, 'esm')
 
-const client = new dhc.CoreClient(serverUrl.href)
+const client = new dhc.CoreClient(serverUrl.href, {
+  // Set to true to see debug logs from the client
+  debug: false,
+  // Enable http2 transport (this is optional but recommended)
+  transportFactory: NodeHttp2gRPCTransport.factory,
+})
 
 await client.login({
   type: dhc.CoreClient.LOGIN_TYPE_ANONYMOUS,
