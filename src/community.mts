@@ -1,19 +1,12 @@
 import { getDhc } from './utils/dhcUtils.mjs'
-import {
-  enableUndiciDiagnostics,
-  enableUndiciHttp2,
-} from './utils/http2Utils.mjs'
 
 console.log('Node.js version:', process.version)
-
-enableUndiciHttp2()
-enableUndiciDiagnostics()
 
 if (typeof globalThis.__dirname === 'undefined') {
   globalThis.__dirname = import.meta.dirname
 }
 
-const serverUrl = new URL('https://localhost:8443/')
+const serverUrl = new URL('http://localhost:10000/')
 
 const dhc = await getDhc(serverUrl, 'esm')
 

@@ -1,18 +1,11 @@
 import { getDhc } from './utils/dhcUtils.mjs'
-import {
-  enableUndiciDiagnostics,
-  enableUndiciHttp2,
-} from './utils/http2Utils.mjs'
-
-enableUndiciHttp2()
-enableUndiciDiagnostics()
 
 if (typeof globalThis.__dirname === 'undefined') {
   globalThis.__dirname = import.meta.dirname
 }
 
 async function main() {
-  const serverUrl = new URL('https://localhost:8443/')
+  const serverUrl = new URL('http://localhost:10000/')
 
   const dhc = await getDhc(serverUrl, 'cjs')
 
