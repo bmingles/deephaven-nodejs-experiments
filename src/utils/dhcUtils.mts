@@ -8,7 +8,7 @@ export async function getDhc(
   targetModuleType: 'cjs' | 'esm',
 ): Promise<typeof DhType> {
   if (targetModuleType === 'esm') {
-    polyfill(true)
+    polyfill()
   }
 
   const storageDir = path.join(__dirname, '..', 'tmp')

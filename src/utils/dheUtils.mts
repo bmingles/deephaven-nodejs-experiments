@@ -5,7 +5,7 @@ import type {
 } from '@deephaven-enterprise/jsapi-types'
 import { loadModules } from '@deephaven/jsapi-nodejs'
 import path from 'node:path'
-import { polyfill } from './polyfillUtils.mjs'
+import { polyfill, polyfillLocation } from './polyfillUtils.mjs'
 import type { UnauthenticatedClient } from '@deephaven-enterprise/auth-nodejs'
 
 declare global {
@@ -15,6 +15,7 @@ declare global {
 
 export async function getDhe(serverUrl: URL): Promise<DheType> {
   polyfill()
+  polyfillLocation()
 
   const tmpDir = path.join(__dirname, '..', 'tmp')
 
@@ -24,7 +25,6 @@ export async function getDhe(serverUrl: URL): Promise<DheType> {
     serverPaths: ['irisapi/irisapi.nocache.js'],
     download: true,
     storageDir: tmpDir,
-    sourceModuleType: 'cjs',
     targetModuleType: 'esm',
   })
 
