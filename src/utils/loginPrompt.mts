@@ -56,5 +56,7 @@ function getAutoComplete(autoCompletePath: string): string[] {
     return []
   }
 
-  return String(fs.readFileSync(autoCompletePath)).split('\n')
+  return String(fs.readFileSync(autoCompletePath))
+    .split('\n')
+    .filter((line) => !line.startsWith('#'))
 }
