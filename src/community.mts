@@ -1,5 +1,8 @@
-import { NodeHttp2gRPCTransport } from '@deephaven/jsapi-nodejs'
-import { getDhc } from './utils/dhcUtils.mjs'
+/**
+ * Example of consuming DH Jsapi from an ESM module.
+ */
+import path from 'node:path'
+import { loadDhModules, NodeHttp2gRPCTransport } from '@deephaven/jsapi-nodejs'
 
 console.log('Node.js version:', process.version)
 
@@ -9,7 +12,13 @@ if (typeof globalThis.__dirname === 'undefined') {
 
 const serverUrl = new URL('http://localhost:10000/')
 
-const dhc = await getDhc(serverUrl, 'esm')
+const storageDir = path.join(__dirname, '..', 'tmp')
+
+const dhc = await loadDhModules({
+  serverUrl,
+  storageDir,
+  targetModuleType: 'esm',
+})
 
 const client = new dhc.CoreClient(serverUrl.href, {
   // Set to true to see debug logs from the client

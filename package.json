@@ -14,7 +14,7 @@
   },
   "dependencies": {
     "@deephaven-enterprise/auth-nodejs": "1.20250801.221-beta",
-    "@deephaven/jsapi-nodejs": "^0.106.2",
+    "@deephaven/jsapi-nodejs": "0.106.5-alpha-jsapi-nodejs.8",
     "read": "^4.0.0"
   },
   "devDependencies": {

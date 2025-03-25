@@ -1,5 +1,8 @@
-import { NodeHttp2gRPCTransport } from '@deephaven/jsapi-nodejs'
-import { getDhc } from './utils/dhcUtils.mjs'
+/**
+ * Example of consuming DH Jsapi from an CJS module.
+ */
+import path from 'node:path'
+import { loadDhModules, NodeHttp2gRPCTransport } from '@deephaven/jsapi-nodejs'
 
 if (typeof globalThis.__dirname === 'undefined') {
   globalThis.__dirname = import.meta.dirname
@@ -8,7 +11,13 @@ if (typeof globalThis.__dirname === 'undefined') {
 async function main() {
   const serverUrl = new URL('http://localhost:10000/')
 
-  const dhc = await getDhc(serverUrl, 'cjs')
+  const storageDir = path.join(__dirname, '..', 'tmp')
+
+  const dhc = await loadDhModules({
+    serverUrl,
+    storageDir,
+    targetModuleType: 'cjs',
+  })
 
   const client = new dhc.CoreClient(serverUrl.href, {
     // Set to true to see debug logs from the client
