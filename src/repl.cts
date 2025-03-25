@@ -58,4 +58,7 @@ async function startRepl() {
     enumerable: true,
     value: credentials,
   })
+
+  // Load test.js into the repl context.
+  r.write('.load ./jsContextTest.js\n')
 }
