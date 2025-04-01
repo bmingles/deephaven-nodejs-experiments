@@ -6,6 +6,8 @@ Examples of consuming [Deephaven](https://deephaven.io/) JS API from NodeJS.
 
 Examples of consuming JS API from a Deephaven Community server.
 
+> The examples assume you are running a Deephaven Community server at http://localhost:1000.
+
 ### CommonJS Example
 
 Run the script: [src/community.cts](src/community.cts)
