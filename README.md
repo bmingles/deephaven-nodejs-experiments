@@ -2,6 +2,14 @@
 
 Examples of consuming [Deephaven](https://deephaven.io/) JS API from NodeJS.
 
+## Installation
+
+To run the examples:
+
+1. Clone this github repo
+1. Install node v20+ (there is a .nvmrc config in the repo if you use [nvm](https://github.com/nvm-sh/nvm))
+1. `npm install`
+
 ## Community Examples
 
 Examples of consuming JS API from a Deephaven Community server.
