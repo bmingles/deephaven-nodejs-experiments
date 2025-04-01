@@ -1,8 +1,10 @@
-# Deephaven REPL experiments
+# Deephaven JS API in NodeJS
+
+Examples of consuming Deephaven JS API from NodeJS.
 
 ## Community Examples
 
-Examples of consuming Jsapi from a Deephaven Community server.
+Examples of consuming JS API from a Deephaven Community server.
 
 ### CommonJS Example
 
