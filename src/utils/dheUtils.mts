@@ -19,7 +19,7 @@ export async function getDhe(serverUrl: URL): Promise<DheType> {
 
   const tmpDir = path.join(__dirname, '..', 'tmp')
 
-  // Download jsapi `ESM` files from DH Community server.
+  // Download jsapi `ESM` files from DHE server.
   await loadModules({
     serverUrl,
     serverPaths: ['irisapi/irisapi.nocache.js'],
