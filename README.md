@@ -1,6 +1,6 @@
 # Deephaven JS API in NodeJS
 
-Examples of consuming Deephaven JS API from NodeJS.
+Examples of consuming [Deephaven](https://deephaven.io/) JS API from NodeJS.
 
 ## Community Examples
 
