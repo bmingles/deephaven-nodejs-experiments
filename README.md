@@ -2,13 +2,19 @@
 
 ## Community Examples
 
-Community `cjs` module
+Examples of consuming Jsapi from a Deephaven Community server.
+
+### CommonJS Example
+
+Run the script: [src/community.cts](src/community.cts)
 
 ```sh
 npx tsx src/community.cts
 ```
 
-Community `esm` module
+### ES Module Example
+
+Run the script: [src/community.mts](src/community.mts)
 
 ```sh
 npx tsx src/community.mts
@@ -20,15 +26,15 @@ npx tsx src/community.mts
 
 1. Repl with `dh` and `client` available on context:
 
-```sh
-npx tsx src/repl.cts
-```
+   ```sh
+   npx tsx src/repl.cts
+   ```
 
-3. Private / public key gen + auth
+1. Private / public key gen + auth
 
-```sh
-npx tsx src/keygen.mts
-```
+   ```sh
+   npx tsx src/keygen.mts
+   ```
 
 > Examples can also be run by opening the file and `f5` to run `tsx` launch config.
 
