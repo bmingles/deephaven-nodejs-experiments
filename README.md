@@ -42,6 +42,12 @@ npx tsx src/community.mts
    npx tsx src/enterpriseRunCode.mts
    ```
 
+1. Subscribe to query config:
+
+   ```sh
+   npx tsx src/enterpriseQueryConfig.mts
+   ```
+
 1. Repl with `dh` and `client` available on context:
 
    ```sh
