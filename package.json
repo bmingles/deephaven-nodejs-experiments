@@ -13,7 +13,7 @@
     "build": "tsc"
   },
   "dependencies": {
-    "@deephaven-enterprise/jsapi-nodejs": "2026.1.260701144527-g2645a55fde",
+    "@deephaven-enterprise/jsapi-nodejs": "2026.1.260701153838-gaed754fcf4",
     "@deephaven/jsapi-nodejs": "0.107.0",
     "read": "^4.0.0"
   },

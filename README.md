@@ -36,6 +36,12 @@ npx tsx src/community.mts
 
 ## Enterprise Examples
 
+1. Run code:
+
+   ```sh
+   npx tsx src/enterpriseRunCode.mts
+   ```
+
 1. Repl with `dh` and `client` available on context:
 
    ```sh
