@@ -11,6 +11,13 @@ import {
   type KeyPairCredentials,
 } from '@deephaven-enterprise/jsapi-nodejs'
 import { loginPrompt } from './utils/loginPrompt.mjs'
+import { enableUndiciHttp2 } from './utils/http2Utils.mjs'
+
+// `uploadPublicKey` uses global `fetch` to upload the public key to the server.
+// Node's fetch doesn't support HTTP/2 by default, so we enable it here. This is
+// similar to what the VS Code extension does when the "Http: Electron Fetch"
+// setting is enabled.
+enableUndiciHttp2()
 
 const { serverUrl, username, password } = await loginPrompt()
 
@@ -36,9 +43,6 @@ console.log(
 )
 console.log()
 
-// NOTE: this currently fails due to what seems to be a bug with node's fetch
-// for http2 servers. We get around this in gRPC using the custom transport, and
-// in VS Code extension by enabling "Http: Electron Fetch" setting.
 await uploadPublicKey({
   dheClient,
   userName: username,
@@ -57,9 +61,12 @@ const keyPairCredentials: KeyPairCredentials = {
   },
 }
 
-await loginClientWithKeyPair(
+const dheClient2 = await loginClientWithKeyPair(
   await jsApiFactories.createEnterpriseClient(dhe, serverUrl),
   keyPairCredentials,
 )
+
+const userInfo = await dheClient2.getUserInfo()
+console.log('Successfully logged in with key pair!', userInfo)
 
 process.exit(0)
