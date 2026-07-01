@@ -7,9 +7,11 @@ import { loginPrompt } from './utils/loginPrompt.mjs'
 
 const { serverUrl, username, password } = await loginPrompt()
 
+const credentials = createPasswordCredentials(username, password)
+
 const corePlusManager = await initCorePlusManager({
   serverUrl,
-  credentials: createPasswordCredentials(username, password),
+  credentials,
 })
 
 // Create a worker query
