@@ -27,6 +27,9 @@
   "peerDependencies": {
     "undici": "^6.18.2"
   },
+  "overrides": {
+    "@deephaven/log": "1.8.0"
+  },
   "optionalDependencies": {
     "@esbuild/aix-ppc64": "0.24.0",
     "@esbuild/android-arm": "0.24.0",
